@@ -3,16 +3,5 @@ defmodule Orisons.Collection do
   Documentation for Orisons.Collection.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Orisons.Collection.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  use Orisons.Collection.Contains
 end
