@@ -1,21 +1,17 @@
-defmodule Orisons.Collection.Contains do
-  @moduledoc false
+defprotocol Orisons.Collection.Contains do
+  @moduledoc """
+  Documentation for Orisons.Collection.Contains
+  """
+  def contains(item, value)
+  def contains(item, value, options \\ [])
+end
 
-  defmacro __using__(_opts) do
-    quote do
+defimpl Orisons.Collection.Contains, for: Tuple do
+  def contains(item, value), do: Enum.find(Tuple.to_list(item), fn(x) -> x == value end) != nil
+  def contains(item, value, :precise), do: Enum.find(Tuple.to_list(item), fn(x) -> x === value end) != nil
+end
 
-        @doc """
-        Hello world.
-
-        ## Examples
-
-            iex> Orisons.Collection.hello
-            :world
-
-        """
-        def contains(item, value) when is_tuple(item), do: Enum.find(Tuple.to_list(item), fn(x) -> x == value end) != nil
-
-
-    end
-  end
+defimpl Orisons.Collection.Contains, for: Map do
+  def contains(item, value), do: Enum.find(Map.values(item), fn(x) -> x == value end) != nil
+  def contains(item, value, :precise), do: Enum.find(Map.values(item), fn(x) -> x === value end) != nil
 end

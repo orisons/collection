@@ -3,5 +3,6 @@ defmodule Orisons.Collection do
   Documentation for Orisons.Collection.
   """
 
-  use Orisons.Collection.Contains
+  # import Contains
+  # use Orisons.Collection.Differences
 end
